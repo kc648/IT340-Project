@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset defaults */
+html, body, app-root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure consistent font + background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
+  color: white;
+}
