@@ -1,3 +1,4 @@
+
         * {
             margin: 0;
             padding: 0;
@@ -60,7 +61,6 @@
             opacity: 0.8;
         }
 
-        /* Login Button (same as landing) */
         .login-btn {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
@@ -79,22 +79,22 @@
             transform: translateY(-2px);
         }
 
-        /* Login Form Container */
-        .login-container {
+        /* Registration Container */
+        .register-container {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            padding: 70px 25px;
+            padding: 10px 25px 10px 25px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             margin-top: 120px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
             z-index: 1;
         }
 
-        .login-container h2 {
+        .register-container h2 {
             font-size: 2rem;
             margin-bottom: 20px;
             color: #f1f5f9;
@@ -124,12 +124,16 @@
             transition: all 0.3s ease;
         }
 
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         .input-group input:focus {
             background: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
 
-        .login-btn-main {
+        .register-btn-main {
             width: 100%;
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
@@ -143,7 +147,7 @@
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
 
-        .login-btn-main:hover {
+        .register-btn-main:hover {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
             transform: translateY(-2px);
@@ -194,9 +198,10 @@
                 gap: 15px;
             }
 
-            .login-container {
+            .register-container {
                 margin-top: 100px;
                 padding: 30px;
             }
         }
+  
 

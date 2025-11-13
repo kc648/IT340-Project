@@ -1,255 +1,254 @@
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
-            min-height: 100vh;
-            color: white;
-        }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
+        color: white;
+        overflow-x: hidden;
+    }
+    /* Navigation */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(20, 30, 60, 0.6);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-        /* Navigation */
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: white;
+    }
+
+    .nav-logo-icon {
+        font-size: 1.6rem;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: opacity 0.3s ease;
+    }
+
+    .login-btn {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+    .login-btn:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5); transform: translateY(-2px); }
+
+
+    /* Hero Section */
+    .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 20px 15px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        line-height: 1.2;
+        color: #f1f5f9;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+        opacity: 0.9;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 25px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        /* Restored key styling for anchor tags */
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: white;
+        padding: 10px 25px;
+        border: 2px solid white;
+        border-radius: 25px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        /* Restored key styling for anchor tags */
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-secondary:hover {
+        background: white;
+        color: #1e3a8a;
+        transform: translateY(-3px);
+    }
+
+    /* Features Section */
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px 15px;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        padding: 15px;
+        border-radius: 15px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+    
+    .feature-icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .feature-card p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 10px 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    footer p {
+        opacity: 0.8;
+        font-size: 0.8rem;
+    }
+
+    /* Music Notes Animation */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(5deg); }
+    }
+    .music-notes { position: fixed; font-size: 1.5rem; opacity: 0.05; pointer-events: none; }
+    .note1 { top: 10%; left: 5%; animation: float 4s ease-in-out infinite; }
+    .note2 { top: 20%; right: 7%; animation: float 5s ease-in-out infinite; }
+    .note3 { bottom: 15%; left: 8%; animation: float 4.5s ease-in-out infinite; }
+    .note4 { bottom: 10%; right: 5%; animation: float 5.5s ease-in-out infinite; }
+    .note5 { top: 45%; left: 3%; animation: float 4.2s ease-in-out infinite; }
+    .note6 { top: 55%; right: 4%; animation: float 4.8s ease-in-out infinite; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(20, 30, 60, 0.6);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
         }
 
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-        }
-
-        .nav-logo-icon {
-            font-size: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* 🎵 Updated Login Button */
-        .login-btn {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-        }
-
-        .login-btn:hover {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
         .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 50px 30px;
-            text-align: center;
+            padding: 20px 15px 10px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            line-height: 1.2;
-            color: #f1f5f9;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.8rem;
         }
 
         .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 40px;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-            padding: 16px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        .btn-primary, .btn-secondary {
+            width: 90%;
+            max-width: 300px;
+            padding: 8px 15px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 16px 40px;
-            border: 2px solid white;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #1e3a8a;
-            transform: translateY(-3px);
-        }
-
-        /* Features Section */
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 50px 60px;
+            padding: 0 15px 10px;
+            grid-template-columns: 1fr; 
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px;
+        }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 480px) {
+        .nav-links {
+            display: none; 
+        }
+        
+        .hero h1 {
+            font-size: 1.5rem;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        .hero p {
+            font-size: 0.85rem;
         }
+    }
+</style>
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #bfdbfe;
-        }
-
-        .feature-card p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        /* Music Notes Animation */
-        .music-notes {
-            position: fixed;
-            font-size: 2rem;
-            opacity: 0.05;
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-        }
-
-        .note1 { top: 15%; left: 8%; animation: float 4s ease-in-out infinite; }
-        .note2 { top: 25%; right: 12%; animation: float 5s ease-in-out infinite; }
-        .note3 { bottom: 20%; left: 10%; animation: float 4.5s ease-in-out infinite; }
-        .note4 { bottom: 15%; right: 8%; animation: float 5.5s ease-in-out infinite; }
-        .note5 { top: 50%; left: 5%; animation: float 4.2s ease-in-out infinite; }
-        .note6 { top: 60%; right: 7%; animation: float 4.8s ease-in-out infinite; }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 25px 50px;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        footer p {
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav {
-                padding: 20px 30px;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .hero {
-                padding: 60px 30px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .features {
-                padding: 60px 30px;
-            }
-        }
 
