@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-@Component({
+@Component ({
   selector: 'app-calendar',
   imports: [RouterModule],
   templateUrl: './calendar.html',
   styleUrl: './calendar.css',
 })
-export class Calendar {
 
+export class Calendar {
+ 
 }
