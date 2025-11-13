@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Journal - October 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .calendar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 50px;
+        }
+
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .calendar-header h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #f1f5f9;
+        }
+
+        .calendar {
+            background: rgba(20, 30, 60, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .weekdays, .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+        }
+
+        .weekday {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            padding: 10px;
+        }
+
+        .day {
+            aspect-ratio: 1;
+            background: rgba(30, 50, 80, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .day:hover {
+            background: rgba(40, 60, 100, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-number {
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+        }
+
+        .empty-day {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            opacity: 0.3;
+        }
+
+        .day.has-recording {
+            background: rgba(40, 60, 100, 0.6);
+        }
+
+        .recording-thumbnail {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        .recording-color {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            opacity: 0.5;
+        }
+
+        .play-button {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #1e3a5f;
+            transition: transform 0.3s ease;
+        }
+
+        .day:hover .play-button {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .calendar-container { padding: 30px; }
+            .days { gap: 10px; }
+            .day-number { font-size: 0.9rem; top: 10px; left: 10px; }
+            .play-button { width: 40px; height: 40px; font-size: 1.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .calendar-container { padding: 20px 15px; }
+            .calendar-header h1 { font-size: 2rem; }
+            .weekday { font-size: 0.75rem; }
+            .days { gap: 8px; }
+            .day-number { font-size: 0.8rem; top: 8px; left: 8px; }
+            .play-button { width: 30px; height: 30px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1>October 2025</h1>
+        </div>
+
+        <div class="calendar">
+            <div class="weekdays">
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+            </div>
+
+            <div class="days" id="calendar-days"></div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const calendarDays = document.getElementById('calendar-days');
+        const recordingDates = [3, 5, 9, 12, 16, 20, 24, 28];
+        const recordingColor = '#5b7a9f';
+        const firstDay = 3; // October 1, 2025 is a Wednesday
+        const daysInMonth = 31;
+
+        // Add empty days before the 1st
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.className = 'day empty-day';
+            calendarDays.appendChild(emptyDay);
+        }
+
+        // Add days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'day';
+
+            const dayNumber = document.createElement('div');
+            dayNumber.className = 'day-number';
+            dayNumber.textContent = day;
+            dayElement.appendChild(dayNumber);
+
+            if (recordingDates.includes(day)) {
+                dayElement.classList.add('has-recording');
+
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'recording-thumbnail';
+
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'recording-color';
+                colorDiv.style.background = recordingColor;
+
+                const playBtn = document.createElement('div');
+                playBtn.className = 'play-button';
+                playBtn.innerHTML = '▶';
+
+                thumbnail.appendChild(colorDiv);
+                thumbnail.appendChild(playBtn);
+                dayElement.appendChild(thumbnail);
+
+                dayElement.addEventListener('click', () => {
+                    alert(`Playing recording from October ${day}, 2025`);
+                });
+            }
+
+            calendarDays.appendChild(dayElement);
+        }
+    });
+    </script>
+</body>
+</html>
+
+

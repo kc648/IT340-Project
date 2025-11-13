@@ -4,8 +4,15 @@
             <span>TuneInDaily</span>
         </a>
         <div class="nav-links">
-            <a href="#features">Features</a>
+            <div class="dropdown">
+                <span class="dropbtn">Features ▾</span>
+                <ul class="dropdown-content">
+                    <li><a routerLink="/calendar">Calendar</a></li>
+                    <li><a href="#add-entry">Add Entry</a></li>
+                    <li><a href="#archive">Archive</a></li>
+                </ul>
+            </div>
             <a href="#about">About</a>
-            <a class="login-btn" routerLink="/login">Log In</a>
+            <a class="login-btn" routerLink="/login">Login</a>
         </div>
 </nav>
