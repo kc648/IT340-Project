@@ -11,3 +11,5 @@ import { Navbar } from './navbar/navbar';
 export class App {
   protected readonly title = signal('mean-stack-frontend');
 }
+
+
