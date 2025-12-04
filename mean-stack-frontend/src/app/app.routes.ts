@@ -16,4 +16,3 @@ export const routes: Routes = [
 	{ path: 'view-entry', component: ViewEntry },
 	{ path: 'archive', component: Archive },
 ];
-
