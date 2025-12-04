@@ -14,6 +14,9 @@ const mongoURI = 'mongodb://appuser:p%40ssw0rd123@192.168.10.30:27017/tune_in_da
 const app = express();
 const PORT = 3000;
 
+const syslog = require('syslog-client');
+const client = syslog.createClient("192.168.10.20");
+
 // --- Middleware ---
 // CRITICAL: Configure CORS to allow your Frontend VM (e.g., at 192.168.10.20 on port 4200)
 
@@ -45,28 +48,50 @@ app.get('/api/landing', (req, res) => {
 });
 
 // 2. Registration Route
+// Registration Route
 app.post('/api/register', async (req, res) => {
     const { username, email, password } = req.body;
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ msg: 'Invalid email format' });
+    }
+
     try {
-        let user = await User.findOne({ email });
-        if (user) {
-            return res.status(400).json({ msg: 'User already exists' });
+        // 1️⃣ Check username availability
+        const existingUsername = await User.findOne({ username });
+        if (existingUsername) {
+            return res.status(400).json({ msg: 'Username unavailable' });
         }
 
-        user = new User({ username, email});
+        // 2️⃣ Check email availability
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) {
+            return res.status(400).json({ msg: 'Email already in use' });
+        }
 
+        // 3️⃣ Hash password
         const salt = await bcrypt.genSalt(10);
-        user.passwordHash = await bcrypt.hash(password, salt);
+        const passwordHash = await bcrypt.hash(password, salt);
+
+        // 4️⃣ Create user after validation
+        const user = new User({
+            username,
+            email,
+            passwordHash
+        });
 
         await user.save();
-        res.status(201).json({ msg: 'User registered successfully' });
+        return res.status(201).json({ msg: 'User registered successfully' });
 
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+        console.error(err);
+        res.status(500).json({ msg: 'Server error' });
     }
 });
+
+
 
 // 3. Login Route
 app.post('/api/login', async (req, res) => {
