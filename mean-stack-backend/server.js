@@ -1,3 +1,5 @@
+console.log("This is the correct server.js version that has been fixed.");
+
 require('dotenv').config(); 
 const mongoose = require('mongoose');
 const express = require('express');
@@ -14,10 +16,13 @@ const PORT = 3000;
 
 // --- Middleware ---
 // CRITICAL: Configure CORS to allow your Frontend VM (e.g., at 192.168.10.20 on port 4200)
-const FRONTEND_URL = 'http://192.168.10.10:4200'; // REPLACE with your Frontend VM IP/Port
 
 app.use(cors({
-    origin: FRONTEND_URL, 
+    origin: ['http://192.168.10.10:4200',
+	    'http://192.168.91.128:4200',
+	    'http://192.168.41.128:4200',
+	    'http://localhost:4200'
+	    ], 
     credentials: true 
 }));
 app.use(bodyParser.json()); 
@@ -49,10 +54,10 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
-        user = new User({ username, email, password });
+        user = new User({ username, email});
 
         const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
+        user.passwordHash = await bcrypt.hash(password, salt);
 
         await user.save();
         res.status(201).json({ msg: 'User registered successfully' });
@@ -73,7 +78,7 @@ app.post('/api/login', async (req, res) => {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.passwordHash);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
@@ -100,5 +105,3 @@ app.post('/api/login', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-
