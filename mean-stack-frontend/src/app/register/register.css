@@ -5,16 +5,6 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
-            min-height: 100vh;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
         /* Navigation */
         nav {
             display: flex;
@@ -79,6 +69,16 @@
             transform: translateY(-2px);
         }
 
+.page-center {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;  /* center left-right */
+    align-items: center;      /* center top-bottom */
+}
+
+
+
         /* Registration Container */
         .register-container {
             background: rgba(255, 255, 255, 0.08);
@@ -88,11 +88,12 @@
             padding: 10px 25px 10px 25px;
             width: 100%;
             max-width: 420px;
-            margin-top: 120px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
             z-index: 1;
-        }
+	    margin-left: 40px;        
+	    margin-top: 15px;
+}
 
         .register-container h2 {
             font-size: 2rem;
