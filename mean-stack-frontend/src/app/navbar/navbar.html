@@ -1,18 +1,30 @@
 <nav class="navbar">
-        <a class="nav-logo" routerLink="/">
-            <span class="nav-logo-icon">🎵</span>
-            <span>TuneInDaily</span>
-        </a>
-        <div class="nav-links">
-            <div class="dropdown">
-                <span class="dropbtn">Features ▾</span>
-                <ul class="dropdown-content">
-                    <li><a routerLink="/calendar">Calendar</a></li>
-                    <li><a routerLink="/add-entry">New Entry</a></li>
-                    <li><a routerLink="/archive">Archive</a></li>
-                </ul>
-            </div>
-            <a href="#about">About</a>
-            <a class="login-btn" routerLink="/login">Login</a>
+    <a class="nav-logo" routerLink="/">
+        <span class="nav-logo-icon">🎵</span>
+        <span>TuneInDaily</span>
+    </a>
+
+    <div class="nav-links">
+
+        <div class="dropdown" *ngIf="auth.isLoggedIn()">
+            <span class="dropbtn">Features ▾</span>
+            <ul class="dropdown-content">
+                <li><a routerLink="/calendar">Calendar</a></li>
+                <li><a routerLink="/add-entry">New Entry</a></li>
+                <li><a routerLink="/archive">Archive</a></li>
+            </ul>
         </div>
+
+        <a href="#about">About</a>
+
+        <!-- ONE button (styled like your original login button) -->
+        <a 
+            class="login-btn"
+            (click)="handleAuthButton()">
+            {{ auth.isLoggedIn() ? 'Logout' : 'Login' }}
+        </a>
+
+    </div>
 </nav>
+
+
