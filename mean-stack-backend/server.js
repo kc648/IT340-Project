@@ -17,6 +17,8 @@ const PORT = 3000;
 const syslog = require('syslog-client');
 const client = syslog.createClient("192.168.10.20");
 
+const entryRoutes = require("./routes/entries");
+
 // --- Middleware ---
 // CRITICAL: Configure CORS to allow your Frontend VM (e.g., at 192.168.10.20 on port 4200)
 
@@ -41,6 +43,7 @@ mongoose.connect(mongoURI)
 });
 
 // --- Routes ---
+app.use("/api/entries", entryRoutes);
 
 // 1. Landing/Health Check Route
 app.get('/api/landing', (req, res) => {
@@ -94,37 +97,45 @@ app.post('/api/register', async (req, res) => {
 
 
 // 3. Login Route
+// 3. Login Route
 app.post('/api/login', async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    try {
-        let user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.passwordHash);
-        if (!isMatch) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
-        }
-
-        const payload = { user: { id: user.id } };
-        
-        jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' },
-            (err, token) => {
-                if (err) throw err;
-                res.json({ token }); 
-            }
-        );
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
     }
+
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+const payload = {
+  user: {
+    id: user._id
+  }
+};
+
+const token = jwt.sign(
+  payload,
+  process.env.JWT_SECRET || 'secret',
+  { expiresIn: '1h' }
+);
+
+res.json({ token });
+
+
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
 });
+
+
+
 // ------------------------------------------
 
 app.listen(PORT, () => {
