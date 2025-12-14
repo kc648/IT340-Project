@@ -16,9 +16,6 @@ const PORT = 3000;
 
 const syslog = require('syslog-client');
 const client = syslog.createClient("192.168.10.20");
-
-const entryRoutes = require("./routes/entries");
-
 // --- Middleware ---
 // CRITICAL: Configure CORS to allow your Frontend VM (e.g., at 192.168.10.20 on port 4200)
 
@@ -27,7 +24,9 @@ app.use(cors({
 	    'http://192.168.91.128:4200',
 	    'http://192.168.41.128:4200',
 	    'http://localhost:4200'
-	    ], 
+	    ],
+allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true 
 }));
 app.use(bodyParser.json()); 
@@ -43,7 +42,11 @@ mongoose.connect(mongoURI)
 });
 
 // --- Routes ---
+const entryRoutes = require("./routes/entries");
+
 app.use("/api/entries", entryRoutes);
+
+
 
 // 1. Landing/Health Check Route
 app.get('/api/landing', (req, res) => {

@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Entry = require("../models/Entry");
 const auth = require("../middleware/auth");
+const mongoose = require('mongoose');
 
 // POST /api/entries
 router.post("/", auth, async (req, res) => {
+  console.log('AUTH USER (POST): ', req.user);
   console.log('BODY FROM ANGULAR: ', req.body);
   try {
     const { date, songTitle, artist, entryText } = req.body;
@@ -24,9 +26,25 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req,res) => {
-    const entries = await Entry.find({ userID: req.user.id });
+// Get ALL entries for logged-in user
+router.get('/', auth, async (req, res) => {
+  console.log('AUTH USER (GET): ', req.user);
+  try {
+    const userObjectId = new mongoose.Types.ObjectId(req.user.id);
+
+    console.log('QUERYING FOR userId: ', userObjectId);
+
+    const entries = await Entry.find({ userId: userObjectId })
+      .sort({ date: -1, createdAt: -1 });
+    
+    console.log('BACKEND RETURNING ENTRIES: ');
+    console.log(entries);
+
     res.json(entries);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;
