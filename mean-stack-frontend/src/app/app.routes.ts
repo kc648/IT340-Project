@@ -17,7 +17,7 @@ export const routes: Routes = [
   // Protected pages
   { path: 'calendar', component: Calendar, canActivate: [AuthGuard] },
   { path: 'add-entry', component: AddEntry, canActivate: [AuthGuard] },
-  { path: 'view-entry', component: ViewEntry, canActivate: [AuthGuard] },
+  { path: 'view-entry/:id', component: ViewEntry, canActivate: [AuthGuard] },
   { path: 'archive', component: Archive, canActivate: [AuthGuard] },
 
   // Wildcard – redirect everything unknown back to login
