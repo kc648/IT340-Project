@@ -31,7 +31,7 @@ export class Login {
       next: (response: any) => {
         if (response.token) {
           this.authService.storeToken(response.token); // Store token via service
-          this.router.navigate(['/landing']); 
+          this.router.navigate(['/add-entry']); 
         } else {
            this.errorMessage = 'Login succeeded but no authentication token was received.';
         }
@@ -42,5 +42,3 @@ export class Login {
     });
   }
 }
-
-

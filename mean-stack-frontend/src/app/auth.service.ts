@@ -1,33 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = (environment as any).apiUrl;
+
+  private readonly apiUrl = 'http://192.168.10.40:3000/api';
 
   constructor(private http: HttpClient) {}
 
+  // REGISTER
   registerUser(userData: any): Observable<any> {
-    return this.http.post('${this.apiUrl}/api/register', userData); // Fixed template literal
+    return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
-  loginUser(loginData: any): Observable<any> {
-    return this.http.post('${this.apiUrl}/api/login', loginData); // Fixed template literal
+  // LOGIN (expects { token })
+  loginUser(loginData: any): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
+      `${this.apiUrl}/login`,
+      loginData
+    );
   }
 
+  // STORE TOKEN (KEY MUST MATCH INTERCEPTOR)
   storeToken(token: string): void {
-    localStorage.setItem('authToken', token);
+    localStorage.setItem('token', token);
   }
 
-  logout() {
-    localStorage.removeItem('authToken');
+  // GET TOKEN
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
+  // LOGOUT
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  // AUTH CHECK
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('authToken');
+    return !!this.getToken();
   }
 }
+
+
