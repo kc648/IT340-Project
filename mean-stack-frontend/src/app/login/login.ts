@@ -31,7 +31,7 @@ export class Login {
       next: (response: any) => {
         if (response.token) {
           this.authService.storeToken(response.token); // Store token via service
-          this.router.navigate(['/add-entry']); 
+          this.router.navigate(['/calendar']); 
         } else {
            this.errorMessage = 'Login succeeded but no authentication token was received.';
         }
