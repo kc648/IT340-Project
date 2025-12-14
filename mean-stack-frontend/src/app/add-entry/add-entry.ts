@@ -26,7 +26,7 @@ export class AddEntry implements OnInit {
   ) {}
 
 ngOnInit(): void {
-  const routeDate = this.route.snapshot.paramMap.get('date');
+  const routeDate = this.route.snapshot.queryParamMap.get('date');
   this.date = routeDate ?? new Date().toISOString().split('T')[0];
 }
 

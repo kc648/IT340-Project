@@ -25,6 +25,10 @@ export class EntryService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  getEntryById(id: string) {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
 }
 
 
