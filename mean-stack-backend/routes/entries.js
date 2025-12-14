@@ -47,6 +47,30 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+
+// GET single entry by ID for logged-in user
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const userObjectId = new mongoose.Types.ObjectId(req.user.id);
+
+    const entry = await Entry.findOne({
+      _id: req.params.id,
+      userId: userObjectId
+    });
+
+    if (!entry) {
+      return res.status(404).json({ msg: 'Entry not found' });
+    }
+
+    res.json(entry);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+
+
 module.exports = router;
 
 
