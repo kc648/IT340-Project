@@ -177,6 +177,15 @@
  
        }
 
+.entry-date-display {
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  margin-bottom: 1.5rem;
+}
+
+
+
         /* Responsive */
         @media (max-width: 768px) {
             nav {
