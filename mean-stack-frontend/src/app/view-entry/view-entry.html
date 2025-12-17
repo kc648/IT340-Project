@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuneInDaily - View entry</title>
+
+</head>
+<body>
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="entry-detail" *ngIf="entry">
+            <div class="icon-header">
+                <div class="headphones-icon">🎧</div>
+            </div>
+
+            <h1> {{ entry.songTitle }} - {{ entry.artist }}</h1>
+            <p class="entry-date"> {{ entry.createdAt | date:'fullDate' }}</p>
+
+            <p class="entry-content">
+		{{ entry.entryText }}
+            </p>
+
+            <a class="back-btn" routerLink="/archive">
+                <span>←</span>
+                <span>Back to archive</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+

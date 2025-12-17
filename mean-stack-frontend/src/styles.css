@@ -1,0 +1,31 @@
+/* Reset defaults */
+html, body, app-root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure consistent font + background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
+  color: white;
+}
+
+/* hide default background shading */
+.fc-bg-event {
+  background: none !important;
+}
+
+/* our single play indicator */
+.fc-bg-event.entry-indicator::after {
+  content: '▶';
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  font-size: 14px;
+  color: white;
+}
+
+
