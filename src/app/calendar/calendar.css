@@ -1,0 +1,218 @@
+/* ===========================
+   Global Reset
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Calendar Base
+=========================== */
+.fc {
+  --fc-border-color: rgba(0, 0, 0, 0.06);
+  --fc-today-bg-color: transparent;
+
+  background-color: #f8fafc;
+  border-radius: 16px;
+  padding: 12px;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+
+}
+
+/* ===========================
+   Header / Toolbar
+=========================== */
+.fc-toolbar {
+  margin-bottom: 12px;
+}
+
+.fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.fc-button {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #374151;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+
+.fc-button:hover {
+  background-color: #f1f5f9;
+}
+
+.fc-button:disabled {
+  opacity: 0.4;
+}
+
+/* ===========================
+   Grid Cleanup
+=========================== */
+.fc-scrollgrid,
+.fc-scrollgrid td,
+.fc-scrollgrid th {
+  border: none;
+}
+
+.fc-daygrid-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ===========================
+   Day Cell (Card Style)
+=========================== */
+.fc-daygrid-day {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  margin: 4px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+.fc-daygrid-day:hover {
+  background-color: #f1f5f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   Day Number
+=========================== */
+.fc-daygrid-day-number {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+  padding: 8px;
+}
+
+/* Days outside current month */
+.fc-day-other {
+  opacity: 0.45;
+}
+
+/* ===========================
+   Today (Elegant Focus Ring)
+=========================== */
+.fc-day-today {
+  outline: 2px solid rgba(91, 122, 159, 0.45);
+  outline-offset: -3px;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+  color: #5b7a9f;
+  font-weight: 600;
+}
+
+/* ===========================
+   Days With Entries
+=========================== */
+.fc-daygrid-day.has-entry {
+  background: rgba(91, 122, 159, 0.08);
+}
+
+.fc-daygrid-day.has-entry:hover {
+  background: rgba(91, 122, 159, 0.12);
+}
+
+/* Entry indicator dot */
+.fc-daygrid-day.has-entry::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #5b7a9f;
+}
+
+/* ===========================
+   Events (Minimal, Non-Stacking)
+=========================== */
+.fc-event {
+  background: #5b7a9f;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  color: #ffffff;
+}
+
+.fc-daygrid-event-harness {
+  max-height: 18px;
+  overflow: hidden;
+}
+
+/* ===========================
+   Interaction Feedback
+=========================== */
+.fc-daygrid-day:active {
+  transform: scale(0.98);
+}
+
+/* ===========================
+   Weekday Header Styling
+=========================== */
+.fc .fc-col-header {
+background-color: linear-gradient(135deg, #0a2342 0%, #1e3a5f 50%, #2c5282 100%);
+
+}
+
+.fc .fc-col-header-cell {
+  padding: 12px 0;
+}
+
+.fc .fc-col-header-cell-cushion {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  /* 👇 THIS IS THE IMPORTANT PART */
+  color: #475569; /* slate gray, visible but subtle */
+}
+
+.fc th.fc-col-header-cell a.fc-col-header-cell-cushion {
+  color: #475569;        /* slate gray */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.fc th.fc-col-header-cell a {
+  color: #475569 !important;
+}
+
+
+
+
+/* ===========================
+   Responsive Tweaks
+=========================== */
+@media (max-width: 768px) {
+  .fc-daygrid-day {
+    margin: 2px;
+    border-radius: 10px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.25rem;
+  }
+}
+
+

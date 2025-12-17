@@ -1,0 +1,178 @@
+/* ===========================
+   Reset Defaults
+=========================== */
+html,
+body,
+app-root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Base App Styling
+=========================== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #0a2342 0%,
+    #1e3a5f 50%,
+    #2c5282 100%
+  );
+  color: white;
+}
+
+/* ===========================
+   FullCalendar Container
+=========================== */
+.fc {
+  background: rgba(20, 30, 60, 0.55);
+  padding: 24px;
+  color: white;
+
+}
+
+/* ===========================
+   Toolbar / Month Title
+=========================== */
+.fc-toolbar-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  letter-spacing: 0.02em;
+}
+
+/* ===========================
+   Calendar Navigation Buttons
+=========================== */
+.fc .fc-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  padding: 8px 14px;
+  margin: 0 4px;
+
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover */
+.fc .fc-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+/* Active */
+.fc .fc-button:active {
+  transform: translateY(1px);
+}
+
+/* Disabled */
+.fc .fc-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Capitalize Today button */
+.fc .fc-today-button {
+  text-transform: capitalize;
+}
+
+/* ===========================
+   Weekday Header (Readable)
+=========================== */
+.fc-col-header {
+  background: rgba(20, 30, 60, 0.6);
+}
+
+.fc th.fc-col-header-cell {
+  padding: 12px 0;
+}
+
+.fc th.fc-col-header-cell a {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* ===========================
+   Calendar Grid & Spacing
+=========================== */
+.fc-scrollgrid tr:not(:last-child) td {
+  border-bottom: 1px solidrgba(255,255,255,0.06);
+}
+
+.fc-scrollgrid td:not(:last-child) {
+  border-bottom: 1px solidrgba(255,255,255,0.06);
+}
+
+
+.fc-daygrid-day {
+  background: rgba(30, 50, 80, 0.55);
+  padding: 6px;
+  transition: background 0.2s ease;
+}
+
+.fc-daygrid-day:hover {
+  background: rgba(40, 70, 110, 0.65);
+  cursor: pointer;
+}
+
+/* ===========================
+   Day Numbers
+=========================== */
+.fc-daygrid-day-number {
+  color: #f1f5f9;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px;
+}
+
+/* Outside current month */
+.fc-day-other {
+  opacity: 0.35;
+}
+
+/* ===========================
+   Today Highlight
+=========================== */
+.fc-day-today {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ===========================
+   Background Events (Entries)
+=========================== */
+.fc-bg-event {
+  background: none !important;
+}
+
+/* ===========================
+   Play Indicator for Entries
+=========================== */
+.fc-bg-event.entry-indicator::after {
+  content: '▶';
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+
+
+  font-size: 1.5rem;
+  color: white;
+
+  pointer-events: none;
+  cursor: pointer;
+}
+
+
