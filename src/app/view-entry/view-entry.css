@@ -120,6 +120,28 @@ background: linear-gradient(135deg, #6d28d9, #5b21b6);
             box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
         }
 
+/* Trash icon button */
+.delete-icon {
+  position: absolute;
+  bottom: 3rem;
+  right: 2rem;
+
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.delete-icon:hover {
+  color: #e74c3c;
+  transform: scale(1.1);
+}
+
+
+
         /* Responsive */
         @media (max-width: 768px) {
             nav {
