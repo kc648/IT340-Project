@@ -69,7 +69,15 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-
+// DELETE single entry
+router.delete('/:id', async (req, res) => {
+  try {
+    await Entry.findByIdAndDelete(req.params.id);
+    res.sendStatus(204);
+  } catch (err) {
+    res.status(500).json({ msg: 'Failed to delete entry.' });
+  }
+});
 
 module.exports = router;
 

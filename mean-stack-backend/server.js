@@ -26,7 +26,7 @@ app.use(cors({
 	    'http://localhost:4200'
 	    ],
 allowedHeaders: ['Content-Type', 'Authorization'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true 
 }));
 app.use(bodyParser.json()); 
