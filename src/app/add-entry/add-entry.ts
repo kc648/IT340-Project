@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EntryService } from '../services/entry';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LogService } from '../services/log';
 
 @Component({
   selector: 'app-add-entry',
@@ -22,7 +23,8 @@ export class AddEntry implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private entryService: EntryService,
-    private router: Router
+    private router: Router,
+    private log: LogService
   ) {}
 
 ngOnInit(): void {
@@ -50,10 +52,13 @@ getLocalDate(): string {
 
   this.entryService.createEntry(payload).subscribe({
     next: res => {
+      this.log.log('CREATED_ENTRY', {date: this.date});
       console.log('ENTRY SAVED:', res);
-      this.router.navigate(['/calendar']);
+      this.router.navigate(['/archive'], { queryParams: { date: this.date } } 
+      );
     },
     error: err => {
+      this.log.log('FAILED_TO_CREATE_ENTRY');
       console.error('SAVE FAILED:', err);
     }
   });

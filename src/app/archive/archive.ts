@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EntryService } from '../services/entry';
 
@@ -17,6 +17,7 @@ export class Archive implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private entryService: EntryService
   ) {}
 
@@ -29,6 +30,19 @@ export class Archive implements OnInit {
       this.loadAllEntries();
     }
   }
+
+  openEntry(entryId: string): void {
+  const returnTo = this.selectedDate
+    ? `/archive?date=${this.selectedDate}`
+    : '/archive';
+
+  this.router.navigate(
+    ['/view-entry', entryId],
+    {
+      queryParams: { returnTo }
+    }
+  );
+}  
 
   loadEntriesForDate(date: string): void {
     this.entryService.getEntries().subscribe(entries => {
@@ -43,6 +57,18 @@ export class Archive implements OnInit {
       this.entries = entries;
     });
   }
+
+  goToAddEntry(): void {
+  const date = this.selectedDate;
+
+  this.router.navigate(
+    ['/add-entry'],
+    date ? { queryParams: { date } } : {}
+  );
+}
+
+
+
 }
 
 

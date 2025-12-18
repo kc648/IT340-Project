@@ -113,6 +113,45 @@
             color: #cbd5e1;
         }
 
+.archive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.archive-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.add-entry-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.add-entry-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+
+
         /* Responsive */
         @media (max-width: 768px) {
             nav {
