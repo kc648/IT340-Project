@@ -1,0 +1,46 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+/* Make the calendar fill nicely */
+.fc {
+  --fc-border-color: #e5e7eb;
+  --fc-today-bg-color: rgba(91, 122, 159, 0.08);
+}
+
+/* Day box = card */
+.fc-daygrid-day {
+  position: relative;
+  cursor: pointer;
+  padding: 6px;
+  transition: background 0.15s ease-in-out;
+}
+
+/* Hover effect */
+.fc-daygrid-day:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Day number styling */
+.fc-daygrid-day-number {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Optional: subtle emphasis for days with entries */
+.fc-daygrid-day.has-entry {
+  background: rgba(91, 122, 159, 0.05);
+}
+
+/* Today highlight (clean, not aggressive) */
+.fc-day-today {
+  outline: 2px solid rgba(91, 122, 159, 0.35);
+  outline-offset: -2px;
+}
+
+
