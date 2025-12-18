@@ -59,8 +59,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
+         "builder": "@angular/build:dev-server",
+         "options": {
+		"proxyConfig": "src/proxy.conf.json"
+       	} 
+	 "configurations": {
             "production": {
               "buildTarget": "mean-stack-frontend:build:production"
             },
